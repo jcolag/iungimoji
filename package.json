@@ -1,0 +1,10 @@
+{
+  "name": "iungimoji",
+  "version": "1.0.0",
+  "description": "A generator for memory games using emoji",
+  "main": "iungimoji.js",
+  "repository": "https://github.com/jcolag/iungimoji",
+  "author": "John Colagioia",
+  "license": "AGPL-3.0-or-later",
+  "private": false
+}

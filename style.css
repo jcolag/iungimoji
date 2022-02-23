@@ -1,0 +1,74 @@
+:root {
+  --background: white;
+  --neutral: gray;
+  --foreground: black;
+}
+
+body {
+  background-color: var(--background);
+  display: grid;
+  justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  color: var(--neutral);
+  font-style: italic;
+}
+
+.game {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  user-select: none;
+}
+
+.cell {
+  background-color: var(--neutral);
+  border: 1px solid var(--foreground);
+  display: table-cell;
+  height: 1.2em;
+  font-size: 10vw;
+  padding-left: 0.1em;
+  transition: all 0.5s ease-in-out;
+  width: 1.15em;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.hide {
+  background-color: var(--foreground);
+  border: 1px solid var(--neutral);
+  color: transparent;
+  transform: scaleX(-1);
+  transition: all 0.5s ease-in-out;
+}
+
+.success {
+  background-color: var(--background);
+  border: 1px solid var(--neutral);
+  color: black;
+  transform: scaleX(1);
+}
+
+.score {
+  margin-left: auto;
+  margin-right: auto;
+  width: 26vw;
+}
+
+.counter {
+  background-color: var(--neutral);
+  border: 1px solid var(--foreground);
+  display: table-cell;
+  height: 1.2em;
+  font-size: 1.5rem;
+  padding-left: 0.1em;
+  width: 12vw;
+}
+
+

@@ -14,7 +14,10 @@ function clicked(e) {
 }
 
 function flipCard(cell) {
-  if (cell.classList.contains('success')) { 
+  if (
+    cell.classList.contains('success') ||
+    !cell.classList.contains('hide')
+  ) {
     return;
   }
 
@@ -27,6 +30,10 @@ function flipCard(cell) {
 }
 
 function checkMatch(cell) {
+  if (openCard === cell) {
+    return;
+  }
+
   if (openCard === null) {
     openCard = cell;
     return;

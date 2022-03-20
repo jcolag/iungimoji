@@ -9,6 +9,13 @@ function clicked(e) {
 
   flipCard(e);
   e.title = (oldTitle + 1).toString();
+  if (
+    document.getElementsByClassName('success').length ===
+    document.getElementsByClassName('cell').length
+  ) {
+    return;
+  }
+
   clicks += 1;
   counter.innerHTML = clicks.toString();
 }

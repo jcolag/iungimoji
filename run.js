@@ -21,6 +21,68 @@ let openCard = null;
 let clicks = 0;
 let items = [];
 
+window.addEventListener('load', (e) => {
+  fetch('./emoji.json')
+    .then(readJson);
+});
+
+function readJson(response) {
+  response.arrayBuffer()
+    .then(startGame);
+}
+
+function startGame(jsonBytes) {
+  const board = document.getElementById('game');
+  const decoder = new TextDecoder('utf-8');
+  const json = decoder.decode(jsonBytes);
+  const emoji = JSON.parse(json);
+
+  for (let em = 0; em < squares / 2; em++) {
+    const index = Math.floor(random() * emoji.length);
+    const codepoints = emoji[index]
+      .unified
+      .split('-')
+      .map((cp) => parseInt(cp, 16));
+    let char = '';
+
+    for (let i = 0; i < codepoints.length; i++) {
+      char += String.fromCodePoint(codepoints[i]);
+    }
+
+    items.push(char);
+    emoji.splice(index, 1);
+  }
+
+  const all = [...items, ...items];
+  const cells = [];
+
+  board.style.width = `${13*size}vw`;
+  for (let i = 0; i < all.length; i++) {
+    const temp = all[i];
+    const j = Math.floor(random() * all.length);
+
+    all[i] = all[j];
+    all[j] = temp;
+  }
+
+  for (let i = 0; i < all.length; i++) {
+    const card = document.createTextNode(all[i]);
+    const div = document.createElement('div');
+
+    div.classList.add('cell', 'hide');
+    div.addEventListener('click', () => clicked(div));
+    div.id = `id="c-${i}"`;
+    div.title = '0';
+    div.appendChild(card);
+    board.appendChild(div);
+    if (i % size === size - 1) {
+      const br = document.createElement('div');
+      br.classList.add('break');
+      board.appendChild(br);
+    }
+  }
+}
+
 function clicked(e) {
   const oldTitle = Number(e.title);
   const counter = document.getElementById('clicks');

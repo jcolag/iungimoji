@@ -1,7 +1,25 @@
 const startTime = Date.now();
 const timer = setInterval(updateClock, 100);
+const query = params();
+let when = Object.prototype.hasOwnProperty.call(query, 'date')
+  && !Number.isNaN(Date.parse(query['date']))
+    ? new Date(params()['date'])
+    : new Date();
+
+if (Math.abs(Date.now() - when.valueOf()) > 1000) {
+  when = new Date(when.setMinutes(when.getTimezoneOffset()));
+}
+
+const seed = cyrb128(when.toDateString());
+const random = sfc32(seed[0], seed[1], seed[2], seed[3]);
+const size = Object.prototype.hasOwnProperty.call(query, 'size')
+  && !Number.isNaN(query['size'])
+    ? Number(query['size'])
+    : 4;
+const squares = size * size;
 let openCard = null;
 let clicks = 0;
+let items = [];
 
 function clicked(e) {
   const oldTitle = Number(e.title);

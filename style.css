@@ -12,6 +12,12 @@ body {
   text-align: center;
 }
 
+footer {
+  bottom: 0;
+  position: absolute;
+  width: 99%;
+}
+
 h1 {
   color: var(--neutral);
   font-style: italic;

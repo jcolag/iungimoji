@@ -59,6 +59,7 @@ function startGame(jsonBytes) {
   const cells = [];
 
   board.style.width = `${13*size}vw`;
+  board.style.marginLeft = `${(100-13*size)/2}vw`;
   for (let i = 0; i < all.length; i++) {
     const temp = all[i];
     const j = Math.floor(random() * all.length);

@@ -1,6 +1,7 @@
 const startTime = Date.now();
 const timer = setInterval(updateClock, 100);
 const query = params();
+const storedSeed = localStorage.getItem('seed');
 const size = Object.prototype.hasOwnProperty.call(query, 'size')
   && !Number.isNaN(query['size'])
     ? Number(query['size'])
@@ -12,11 +13,19 @@ let when = Object.prototype.hasOwnProperty.call(query, 'date')
 
 if (when > new Date()) {
   when = new Date();
-} else if (Math.abs(Date.now() - when.valueOf()) > 1000) {
+} else if (Math.abs(Date.now() - when.valueOf()) > 10000) {
   when = new Date(when.setMinutes(when.getTimezoneOffset()));
 }
 
-const seed = cyrb128(when.toDateString() + '-' + size.toString());
+when = when.toDateString();
+if (storedSeed !== null) {
+  const stext = new Date(Number(storedSeed)).toString();
+  if (stext.indexOf(when) >= 0) {
+    when = stext;
+  }
+}
+
+const seed = cyrb128(when + '-' + size.toString());
 const random = sfc32(seed[0], seed[1], seed[2], seed[3]);
 const squares = size * size;
 let openCard = null;
@@ -24,6 +33,21 @@ let clicks = 0;
 let items = [];
 
 window.addEventListener('load', (e) => {
+  const config = document.getElementById('config-modal');
+  const openConfig = document.getElementById('config');
+  const closeConfig = document.getElementById('close-config');
+
+  openConfig.addEventListener(
+    'click', () => config.classList.remove('hidden-modal')
+  );
+  closeConfig.addEventListener(
+    'click', () => {
+      config.classList.add('hidden-modal');
+      if (needRestart) {
+        window.location.reload();
+      }
+    }
+  );
   fetch('./emoji.json')
     .then(readJson);
 });
@@ -217,4 +241,9 @@ function sfc32(a, b, c, d) {
     c = c + t | 0;
     return (t >>> 0) / 4294967296;
   }
+}
+
+function updateGame() {
+  localStorage.setItem('seed', Date.now().toString());
+  needRestart = true;
 }

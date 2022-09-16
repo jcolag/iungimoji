@@ -8,7 +8,7 @@ const size = Object.prototype.hasOwnProperty.call(query, 'size')
     : 4;
 let when = Object.prototype.hasOwnProperty.call(query, 'date')
   && !Number.isNaN(Date.parse(query['date']))
-    ? new Date(params()['date'])
+    ? new Date(query['date'])
     : new Date();
 
 if (when > new Date()) {

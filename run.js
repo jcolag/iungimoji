@@ -6,6 +6,7 @@ const size = Object.prototype.hasOwnProperty.call(query, 'size')
   && !Number.isNaN(query['size'])
     ? Number(query['size'])
     : 4;
+let needRestart = false;
 let when = Object.prototype.hasOwnProperty.call(query, 'date')
   && !Number.isNaN(Date.parse(query['date']))
     ? new Date(query['date'])

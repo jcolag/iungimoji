@@ -2,6 +2,8 @@ const startTime = Date.now();
 const timer = setInterval(updateClock, 100);
 const query = params();
 const storedSeed = localStorage.getItem('seed');
+const seedSet = localStorage.getItem('seedSet');
+const day = Math.floor(Date.now() / 86400000);
 const size = Object.prototype.hasOwnProperty.call(query, 'size')
   && !Number.isNaN(query['size'])
     ? Number(query['size'])

@@ -22,8 +22,8 @@ if (when > new Date()) {
 
 when = when.toDateString();
 if (storedSeed !== null) {
-  const stext = new Date(Number(storedSeed)).toString();
   if (stext.indexOf(when) >= 0) {
+  let stext = storedSeed;
     when = stext;
   }
 }

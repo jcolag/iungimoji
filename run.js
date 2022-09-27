@@ -22,8 +22,13 @@ if (when > new Date()) {
 
 when = when.toDateString();
 if (storedSeed !== null) {
-  if (stext.indexOf(when) >= 0) {
   let stext = storedSeed;
+
+  if (Number(seedSet) === day) {
+    if (storedSeed.indexOf(':') >= 0) {
+      stext = new Date(Number(storedSeed)).toString();
+    }
+
     when = stext;
   }
 }

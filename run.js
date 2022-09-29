@@ -3,6 +3,7 @@ const timer = setInterval(updateClock, 100);
 const query = params();
 const storedSeed = localStorage.getItem('seed');
 const seedSet = localStorage.getItem('seedSet');
+const storedSize = localStorage.getItem('size');
 const day = Math.floor(Date.now() / 86400000);
 const size = Object.prototype.hasOwnProperty.call(query, 'size')
   && !Number.isNaN(query['size'])
@@ -267,4 +268,11 @@ function dateSet() {
 
 function updateGame() {
   setSeed(Date.now().toString());
+}
+
+function updateSize() {
+  const sizePick = document.getElementById('game-size');
+  const size = sizePick.value;
+  localStorage.setItem('size', size);
+  needRestart = true;
 }

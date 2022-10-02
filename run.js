@@ -47,7 +47,9 @@ window.addEventListener('load', (e) => {
   const config = document.getElementById('config-modal');
   const openConfig = document.getElementById('config');
   const closeConfig = document.getElementById('close-config');
+  const sizePick = document.getElementById('game-size');
 
+  sizePick.value = size;
   openConfig.addEventListener(
     'click', () => config.classList.remove('hidden-modal')
   );

@@ -5,15 +5,17 @@ const storedSeed = localStorage.getItem('seed');
 const seedSet = localStorage.getItem('seedSet');
 const storedSize = localStorage.getItem('size');
 const day = Math.floor(Date.now() / 86400000);
-const size = Object.prototype.hasOwnProperty.call(query, 'size')
-  && !Number.isNaN(query['size'])
-    ? Number(query['size'])
-    : 4;
+let size = Number.isNaN(Number(storedSize)) ? 4 : Number(storedSize);
 let needRestart = false;
 let when = Object.prototype.hasOwnProperty.call(query, 'date')
   && !Number.isNaN(Date.parse(query['date']))
     ? new Date(query['date'])
     : new Date();
+
+size = Object.prototype.hasOwnProperty.call(query, 'size')
+  && !Number.isNaN(query['size'])
+    ? Number(query['size'])
+    : size;
 
 if (when > new Date()) {
   when = new Date();

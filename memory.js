@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 John Colagioia <john@colagioia.net>
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 const startTime = Date.now();
 const timer = setInterval(updateClock, 100);
 let openCard = null;
